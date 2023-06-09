@@ -1,0 +1,412 @@
+--Instances:
+
+local SynapseXreal = Instance.new("ScreenGui")
+
+local MainFrame = Instance.new("Frame")
+
+local bar = Instance.new("Frame")
+
+local Close = Instance.new("TextButton")
+
+local ImageLabel = Instance.new("ImageLabel")
+
+local security = Instance.new("TextLabel")
+
+local EditorFrame = Instance.new("ScrollingFrame")
+
+local Source = Instance.new("TextBox")
+
+local Comments_ = Instance.new("TextLabel")
+
+local Globals_ = Instance.new("TextLabel")
+
+local Keywords_ = Instance.new("TextLabel")
+
+local RemoteHighlight_ = Instance.new("TextLabel")
+
+local Strings_ = Instance.new("TextLabel")
+
+local Tokens_ = Instance.new("TextLabel")
+
+local Numbers_ = Instance.new("TextLabel")
+
+local Lines = Instance.new("TextLabel")
+
+local title = Instance.new("TextLabel")
+
+local list = Instance.new("Frame")
+
+local execute = Instance.new("TextButton")
+
+local clear = Instance.new("TextButton")
+
+local scripthub = Instance.new("TextButton")
+
+local Attach = Instance.new("TextButton")
+
+local title_2 = Instance.new("ImageLabel")
+
+local scripthub_2 = Instance.new("Frame")
+
+local bar_2 = Instance.new("Frame")
+
+local select = Instance.new("Frame")
+
+local dex = Instance.new("TextButton")
+
+local esp = Instance.new("TextButton")
+
+local spy = Instance.new("TextButton")
+
+local dumper = Instance.new("TextButton")
+
+local desc = Instance.new("Frame")
+
+local descri = Instance.new("TextLabel")
+
+local title_3 = Instance.new("TextLabel")
+
+local execute_2 = Instance.new("TextButton")
+
+local close = Instance.new("TextButton")
+
+local title_4 = Instance.new("ImageLabel")
+
+local scriptselected = "none"
+
+local injected = false 
+
+Strings_.Parent = Source
+
+Strings_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+
+Strings_.BackgroundTransparency = 1.000
+
+Strings_.Size = UDim2.new(1, 0, 1, 0)
+
+Strings_.ZIndex = 5
+
+Strings_.Font = Enum.Font.Code
+
+Strings_.Text = ""
+
+Strings_.TextColor3 = Color3.fromRGB(173, 241, 149)
+
+Strings_.TextSize = 15.000
+
+Strings_.TextXAlignment = Enum.TextXAlignment.Left
+
+Strings_.TextYAlignment = Enum.TextYAlignment.Top
+
+Tokens_.Name = "Tokens_"
+
+Tokens_.Parent = Source
+
+Tokens_.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+
+Tokens_.BackgroundTransparency = 1.000
+
+Tokens_.Size = UDim2.new(1, 0, 1, 0)
+
+Tokens_.ZIndex = 5
+
+Tokens_.Font = Enum.Font.Code
+
+Tokens_.Text = ""
+
+Tokens_.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+Tokens_.TextSize = 15.000
+
+Tokens_.TextXAlignment = Enum.TextXAlignment.Left
+
+Tokens_.TextYAlignment = Enum.TextYAlignment.Top
+
+dex.Name = "dex"
+
+dex.Parent = select
+
+dex.BackgroundColor3 = Color3.fromRGB(0, 32, 61)
+
+dex.BackgroundTransparency = 1.000
+
+dex.BorderColor3 = Color3.fromRGB(0, 0, 49)
+
+dex.BorderSizePixel = 0
+
+dex.Position = UDim2.new(0.0121960752, 0, -1.49011612e-08, 0)
+
+dex.Size = UDim2.new(0, 80, 0, 18)
+
+dex.Font = Enum.Font.SourceSans
+
+dex.Text = " Dark Dex"
+
+dex.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+dex.TextSize = 14.000
+
+dex.TextXAlignment = Enum.TextXAlignment.Left
+
+dex.ZIndex = 110
+
+dex.MouseButton1Click:Connect(function()
+
+    scriptselected = "dex"
+
+end)
+
+esp.Name = "esp"
+
+esp.Parent = select
+
+esp.BackgroundColor3 = Color3.fromRGB(0, 32, 61)
+
+esp.BackgroundTransparency = 1.000
+
+esp.BorderColor3 = Color3.fromRGB(0, 0, 49)
+
+esp.BorderSizePixel = 0
+
+esp.Position = UDim2.new(0.0121960752, 0, 0.0681818053, 0)
+
+esp.Size = UDim2.new(0, 80, 0, 18)
+
+esp.Font = Enum.Font.SourceSans
+
+esp.Text = " Unnamed ESP"
+
+esp.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+esp.TextSize = 14.000
+
+esp.TextXAlignment = Enum.TextXAlignment.Left
+
+esp.ZIndex = 110
+
+esp.MouseButton1Click:Connect(function()
+
+    scriptselected = "esp"
+
+end)
+
+        local Token =
+
+            {
+
+                ["="] = true,
+
+                ["."] = true,
+
+                [","] = true,
+
+                ["("] = true,
+
+                [")"] = true,
+
+                ["["] = true,
+
+                ["]"] = true,
+
+                ["{"] = true,
+
+                ["}"] = true,
+
+                [":"] = true,
+
+                ["*"] = true,
+
+                ["/"] = true,
+
+                ["+"] = true,
+
+                ["-"] = true,
+
+                ["%"] = true,
+
+                [";"] = true,
+
+                ["~"] = true
+
+            }
+
+        for i, v in pairs(keywords) do
+
+            K[v] = true
+
+        end
+
+        S = S:gsub(".", function(c)
+
+            if Token[c] ~= nil then
+
+                return "\32"
+
+            else
+
+                return c
+
+            end
+
+        end)
+
+        S = S:gsub("%S+", function(c)
+
+            if K[c] ~= nil then
+
+                return c
+
+            else
+
+                return (" "):rep(#c)
+
+            end
+
+        end)
+
+        return S
+
+    end
+
+    local hTokens = function(string)
+
+        local Token =
+
+            {
+
+                ["="] = true,
+
+                ["."] = true,
+
+                [","] = true,
+
+                ["("] = true,
+
+                [")"] = true,
+
+                ["["] = true,
+
+                ["]"] = true,
+
+                ["{"] = true,
+
+                ["}"] = true,
+
+                [":"] = true,
+
+                ["*"] = true,
+
+                ["/"] = true,
+
+                ["+"] = true,
+
+                ["-"] = true,
+
+                ["%"] = true,
+
+                [";"] = true,
+
+                ["~"] = true 
+            local dragging
+
+    local dragInput
+
+    local dragStart
+
+    local startPos
+
+    local function update(input)
+
+        local delta = input.Position - dragStart
+
+        gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+
+    end
+
+    gui.InputBegan:Connect(function(input)
+
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+
+            dragging = true
+
+            dragStart = input.Position
+
+            startPos = gui.Position
+
+            input.Changed:Connect(function()
+
+                if input.UserInputState == Enum.UserInputState.End then
+
+                    dragging = false
+
+                end
+
+            end)
+
+        end
+
+    end)
+    
+    gui.InputChanged:Connect(function(input)
+
+        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+
+            dragInput = input
+
+        end
+
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+
+        if input == dragInput and dragging then
+
+            update(input)
+
+        end
+
+    end)
+
+end
+
+coroutine.wrap(VEUJFP_fake_script)()
+
+while true do
+
+    wait(0.01)
+
+    if scripthub_2.Visible == true then
+
+        if scriptselected == "none" then
+
+            descri.Text = ""
+
+        end
+
+        if scriptselected == "dex" then
+
+            descri.Text = "A version of the popular Dex explorer with patches specifically for Synapse X Remake."
+
+        end
+
+        if scriptselected == "esp" then
+
+            descri.Text = "ESP Made by ic3w0lf using the Drawing API."
+
+        end
+
+        if scriptselected == "spy" then
+
+            descri.Text = "Allows you to view RemoteEvents and RemoteFunctions called."
+
+        end
+
+        if scriptselected == "dumper" then
+
+            descri.Text = "Dumps the place as a .rbxl file in your workspace folder."
+
+        end
+
+    end
+
+end
